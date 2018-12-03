@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <title>診断メーカーもどき</title>
+</head>
+<body>
+  <div class="container">
+
+    <h1 class="h">診断メーカーもどき</h1>
+
+    <div class="card">
+      <div class="card-header bg-info text-white">
+        おみくじ
+      </div>
+      <div class="card-body">
+        <p class="card-text">日替わりです</p>
+        <form>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="お名前" aria-label="お名前" aria-describedby="button-addon2" id="name">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-primary" onclick="play()">送信</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <br>
+    <div class="card">
+      <div class="card-header bg-success text-white">結果</div>
+      <div class="list-group-item">
+        <div id="result">
+          結果はここ
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="lib/seedrandom.min.js" type="text/javascript"></script>
+<script>
+  function play(){
+    var result = document.getElementById("result");
+    result.innerText = draw();
+
+  }
+
+  function abs(val){
+    return val < 0 ? -val : val;
+  }
+
+  function draw(){
+    var name = document.getElementById("name").value;
+    var date = new Date();
+    var rand = new Math.seedrandom(name + date.toLocaleDateString()).int32();
+
+    result_list = [
+      "大吉",
+      "中吉",
+      "小吉",
+      "吉",
+      "凶",
+      "大凶"
+    ];
+
+    return result_list[abs(rand % 6)];
+  }
+</script>
+</html>
